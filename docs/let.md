@@ -10,24 +10,31 @@ ES6新增了`let`命令，用来声明变量。它的用法类似于`var`，但�
 {
   let a = 10;
   var b = 1;
+  console.log(a); //10
+  console.log(b); //1
 }
+  console.log(b); //1
+  console.log(a); //ReferenceError: a is not defined.
 
-a // ReferenceError: a is not defined.
-b // 1
-```
 
-上面代码在代码块之中，分别用`let`和`var`声明了两个变量。然后在代码块之外调用这两个变量，结果`let`声明的变量报错，`var`声明的变量返回了正确的值。这表明，`let`声明的变量只在它所在的代码块有效。
+
+上面代码在代码块之中，分别用`let`和`var`声明了两个变量。然后在代码块之外输出了这两个变量，在代码块之外`let`声明的变量报错，`var`声明的变量返回了正确的值。这表明，`let`声明的变量只在它所在的代码块有效。
 
 `for`循环的计数器，就很合适使用let命令。
 
 ```javascript
-for (let i = 0; i < arr.length; i++) {}
+var arr = [1,2];
+for (let i = 0; i < arr.length; i++) {
+  console.log(i+" in");
+}
 
-console.log(i);
+console.log(i+" out");
+//0 in
+//1 in
 //ReferenceError: i is not defined
 ```
 
-上面代码的计数器`i`，只在`for`循环体内有效。
+上面代码的计数器`i`，只在`for`循环体内有效,每一次循环let都会定义一个新的i。
 
 下面的代码如果使用`var`，最后输出的是10。
 
@@ -224,6 +231,7 @@ function f1() {
   let n = 5;
   if (true) {
     let n = 10;
+    console.log(n); // 10
   }
   console.log(n); // 5
 }
